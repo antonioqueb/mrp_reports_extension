@@ -1,18 +1,19 @@
 <odoo>
     <!-- Definición del Reporte -->
     <report
-        id="report_product_efficiency" 
-        model="mrp.product.efficiency.report" 
-        string="Reporte Consolidado de Eficiencia por Producto" 
-        report_type="qweb-pdf" 
-        name="mrp_reports_extension.report_product_efficiency"  
-        file="mrp_reports_extension.report_product_efficiency" 
-        print_report_name="'Reporte_Eficiencia_%s' % (object.create_date.strftime('%Y-%m-%d'))" 
+        id="report_product_efficiency"
+        model="mrp.product.efficiency.report"
+        string="Reporte Consolidado de Eficiencia por Producto"
+        report_type="qweb-pdf"
+        name="mrp_reports_extension.report_product_efficiency"
+        file="mrp_reports_extension.report_product_efficiency"
+        print_report_name="'Reporte_Eficiencia_%s' % (object.create_date.strftime('%Y-%m-%d'))"
     />
 
     <!-- Plantilla del Reporte -->
     <template id="report_product_efficiency">
-        <t t-call="web.basic_layout">  
+        <t t-call="web.basic_layout">
+            <div class="page">
                 <h2 style="text-align: center;">Reporte Consolidado de Eficiencia por Producto</h2>
                 <table class="table table-bordered" style="width: 100%; border-collapse: collapse;">
                     <thead style="background-color: #f5f5f5;">
