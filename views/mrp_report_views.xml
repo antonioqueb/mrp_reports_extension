@@ -18,42 +18,19 @@
         </field>
     </record>
 
-    <!-- Vista Lista para Selección -->
-    <record id="view_mrp_report_list" model="ir.ui.view">
-        <field name="name">mrp.report.list</field>
+    <!-- Vista Personalizada -->
+    <record id="view_mrp_production_tree_custom" model="ir.ui.view">
+        <field name="name">mrp.production.tree.custom</field>
         <field name="model">mrp.production</field>
         <field name="arch" type="xml">
             <tree string="Vista Previa: Reporte de Eficiencia">
-                <field name="name" string="Orden de Producción"/>
-                <field name="product_id" string="Producto"/>
-                <field name="efficiency_percentage" string="Eficiencia (%)"/>
-                <field name="state" string="Estado"/>
-                <field name="date_start" string="Fecha de Inicio"/> 
-            </tree>
-        </field>
-    </record>
-
-    <!-- Botón en Vista de Lista -->
-    <record id="view_mrp_production_tree_inherit" model="ir.ui.view">
-        <field name="name">mrp.production.tree.inherit</field>
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.view_mrp_production_tree"/>
-        <field name="arch" type="xml">
-            <tree>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="efficiency_percentage"/>
+                <field name="state"/>
+                <field name="date_start"/>
                 <button name="%(action_mrp_report_pdf)d" string="Generar PDF" type="action" class="btn-primary"/>
             </tree>
-        </field>
-    </record>
-
-    <!-- Botón en Vista de Formulario -->
-    <record id="view_mrp_production_form_inherit" model="ir.ui.view">
-        <field name="name">mrp.production.form.inherit</field>
-        <field name="model">mrp.production</field>
-        <field name="inherit_id" ref="mrp.view_mrp_production_form"/>
-        <field name="arch" type="xml">
-            <header>
-                <button name="%(action_mrp_report_pdf)d" string="Generar Reporte PDF" type="action" class="btn-primary"/>
-            </header>
         </field>
     </record>
 
