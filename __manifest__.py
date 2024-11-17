@@ -11,12 +11,7 @@
         'reports/report_mrp_efficiency.xml',
         'views/mrp_report_views.xml',
     ],
-    'assets': {
-        'web.assets_backend': [
-            '/mrp_reports_extension/static/src/css/styles.css',
-            '/mrp_reports_extension/static/src/js/scripts.js',
-        ],
-    },
+
     'installable': True,
     'application': False,
     'auto_install': False,
