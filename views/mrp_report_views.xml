@@ -1,74 +1,28 @@
 <odoo>
-    <!-- Menú para Reportes MRP -->
-    <menuitem id="menu_mrp_reports_extension" 
-              name="Reportes MRP" 
-              parent="mrp.menu_mrp_root" 
-              sequence="10" />
-
-    <!-- Acción para Vista Previa del Reporte -->
-    <record id="action_mrp_report_preview" model="ir.actions.act_window">
-        <field name="name">Vista Previa: Eficiencia</field>
-        <field name="res_model">mrp.production</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[]</field>
-        <field name="context">{'default_report_mode': 'preview'}</field>
-    </record>
-
-    <!-- Acción para Generar PDF -->
-    <record id="action_generate_pdf" model="ir.actions.server">
-        <field name="name">Generar Reporte PDF</field>
-        <field name="model_id" ref="mrp.model_mrp_production"/>
-        <field name="state">code</field>
-        <field name="code">
-            action = env['ir.actions.report']._get_report_from_name('mrp_reports_extension.report_mrp_efficiency').report_action(records)
-        </field>
-    </record>
-
-    <!-- Vista Lista Personalizada -->
-    <record id="view_mrp_report_list" model="ir.ui.view">
-        <field name="name">mrp.report.list</field>
-        <field name="model">mrp.production</field>
+    <record id="view_mrp_product_efficiency_report_tree" model="ir.ui.view">
+        <field name="name">mrp.product.efficiency.report.tree</field>
+        <field name="model">mrp.product.efficiency.report</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="name" string="Orden de Producción"/>
-                <field name="product_id" string="Producto"/>
-                <field name="efficiency_percentage" string="Eficiencia (%)"/>
-                <field name="state" string="Estado"/>
+            <tree string="Reporte de Eficiencia por Producto">
+                <field name="product_id"/>
+                <field name="total_quantity"/>
+                <field name="total_planned_duration"/>
+                <field name="total_real_duration"/>
+                <field name="average_efficiency"/>
             </tree>
         </field>
     </record>
 
-    <!-- Vista Formulario con Botón para Generar PDF -->
-    <record id="view_mrp_report_list_form" model="ir.ui.view">
-        <field name="name">mrp.report.list.form</field>
-        <field name="model">mrp.production</field>
-        <field name="arch" type="xml">
-            <form string="Reporte de Eficiencia">
-                <sheet>
-                    <!-- Agregar company_id a la vista -->
-                    <group>
-                        <field name="company_id" invisible="1"/>
-                    </group>
-                    <button string="Generar Reporte PDF"
-                            name="%(action_generate_pdf)d"
-                            type="action"
-                            class="btn-primary"
-                            context="{'active_ids': active_ids}"/>
-                    <group>
-                        <field name="name"/>
-                        <field name="product_id"/>
-                        <field name="efficiency_percentage"/>
-                        <field name="state"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
+    <record id="action_mrp_product_efficiency_report" model="ir.actions.act_window">
+        <field name="name">Reporte de Eficiencia por Producto</field>
+        <field name="res_model">mrp.product.efficiency.report</field>
+        <field name="view_mode">tree"/>
+        <field name="context">{}</field>
     </record>
 
-    <!-- Enlace del Menú a Vista Previa -->
-    <menuitem id="menu_mrp_report_efficiency_preview" 
-              name="Vista Previa: Eficiencia" 
-              parent="menu_mrp_reports_extension" 
-              action="action_mrp_report_preview" 
-              sequence="20" />
+    <menuitem id="menu_mrp_product_efficiency_report" 
+              name="Reporte de Eficiencia por Producto" 
+              parent="mrp.menu_mrp_root" 
+              action="action_mrp_product_efficiency_report" 
+              sequence="30"/>
 </odoo>

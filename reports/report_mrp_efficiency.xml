@@ -1,36 +1,34 @@
 <odoo>
     <report
-        id="report_mrp_efficiency"
-        model="mrp.production"
-        string="Eficiencia de Producción"
+        id="report_product_efficiency"
+        model="mrp.product.efficiency.report"
+        string="Reporte Consolidado de Eficiencia por Producto"
         report_type="qweb-pdf"
-        name="mrp_reports_extension.report_mrp_efficiency"
-        file="mrp_reports_extension.report_mrp_efficiency"
-        print_report_name="'Eficiencia de Producción - ' + object.name"
+        name="mrp_reports_extension.report_product_efficiency"
+        file="mrp_reports_extension.report_product_efficiency"
     />
 
-    <template id="report_mrp_efficiency">
+    <template id="report_product_efficiency">
         <t t-call="web.basic_layout">
-            <t t-set="doc" t-value="doc"/>
             <div class="page">
-                <h2>Eficiencia de Producción</h2>
+                <h2>Reporte Consolidado de Eficiencia por Producto</h2>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Orden de Producción</th>
                             <th>Producto</th>
-                            <th>Duración Planificada</th>
-                            <th>Duración Real</th>
-                            <th>Eficiencia (%)</th>
+                            <th>Cantidad Total</th>
+                            <th>Duración Planificada Total</th>
+                            <th>Duración Real Total</th>
+                            <th>Eficiencia Promedio (%)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr t-foreach="docs" t-as="production">
-                            <td t-esc="production.name" />
-                            <td t-esc="production.product_id.name" />
-                            <td t-esc="sum(production.workorder_ids.mapped('duration_expected'))" />
-                            <td t-esc="sum(production.workorder_ids.mapped('duration'))" />
-                            <td t-esc="production.efficiency_percentage" />
+                        <tr t-foreach="docs" t-as="doc">
+                            <td t-esc="doc.product_id.name"/>
+                            <td t-esc="doc.total_quantity"/>
+                            <td t-esc="doc.total_planned_duration"/>
+                            <td t-esc="doc.total_real_duration"/>
+                            <td t-esc="doc.average_efficiency"/>
                         </tr>
                     </tbody>
                 </table>
