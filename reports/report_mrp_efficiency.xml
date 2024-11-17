@@ -18,8 +18,8 @@
                         <tr>
                             <th>Orden de Producción</th>
                             <th>Producto</th>
-                            <th>Tiempo Planificado</th>
-                            <th>Tiempo Real</th>
+                            <th>Duración Planificada</th>
+                            <th>Duración Real</th>
                             <th>Eficiencia (%)</th>
                         </tr>
                     </thead>
@@ -27,8 +27,8 @@
                         <tr t-foreach="docs" t-as="production">
                             <td t-esc="production.name" />
                             <td t-esc="production.product_id.name" />
-                            <td t-esc="production.time_planned" />
-                            <td t-esc="production.time_actual" />
+                            <td t-esc="sum(production.workorder_ids.mapped('duration_expected'))" />
+                            <td t-esc="sum(production.workorder_ids.mapped('duration'))" />
                             <td t-esc="production.efficiency_percentage" />
                         </tr>
                     </tbody>
