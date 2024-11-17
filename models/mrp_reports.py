@@ -1,5 +1,28 @@
 from odoo import models, fields, api
 
+class MrpProduction(models.Model):
+    _inherit = 'mrp.production'
+
+    efficiency_percentage = fields.Float(
+        string="Eficiencia (%)",
+        compute='_compute_efficiency',
+        store=True,
+    )
+
+    @api.depends('workorder_ids')
+    def _compute_efficiency(self):
+        """
+        Calcula la eficiencia de la orden de fabricación basada en las órdenes de trabajo asociadas.
+        """
+        for record in self:
+            planned_time = sum(record.workorder_ids.mapped('duration_expected'))  # Duración planificada total
+            actual_time = sum(record.workorder_ids.mapped('duration'))  # Duración real total
+            if actual_time > 0:
+                record.efficiency_percentage = (planned_time / actual_time) * 100
+            else:
+                record.efficiency_percentage = 0.0
+
+
 class MrpProductEfficiencyReport(models.TransientModel):
     _name = 'mrp.product.efficiency.report'
     _description = 'Reporte de Eficiencia por Producto'
@@ -12,7 +35,9 @@ class MrpProductEfficiencyReport(models.TransientModel):
 
     @api.model
     def generate_report_data(self):
-        # Agrupa las órdenes de fabricación por producto
+        """
+        Genera datos agrupados de eficiencia por producto a partir de las órdenes de fabricación.
+        """
         query = """
             SELECT 
                 product_id,
