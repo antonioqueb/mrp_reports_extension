@@ -1,0 +1,39 @@
+<odoo>
+    <report
+        id="report_mrp_efficiency"
+        model="mrp.production"
+        string="Eficiencia de Producción"
+        report_type="qweb-pdf"
+        name="mrp_reports_extension.report_mrp_efficiency"
+        file="mrp_reports_extension.report_mrp_efficiency"
+    />
+
+    <template id="report_mrp_efficiency">
+        <t t-call="web.basic_layout">
+            <t t-set="doc" t-value="doc"/>
+            <div class="page">
+                <h2>Eficiencia de Producción</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Orden de Producción</th>
+                            <th>Producto</th>
+                            <th>Tiempo Planificado</th>
+                            <th>Tiempo Real</th>
+                            <th>Eficiencia (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="docs" t-as="production">
+                            <td t-esc="production.name" />
+                            <td t-esc="production.product_id.name" />
+                            <td t-esc="production.time_planned" />
+                            <td t-esc="production.time_actual" />
+                            <td t-esc="production.efficiency_percentage" />
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

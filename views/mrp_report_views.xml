@@ -1,0 +1,14 @@
+<odoo>
+    <menuitem id="menu_mrp_reports_extension" name="MRP Reportes" parent="mrp.menu_mrp_root" sequence="10" />
+
+    <record id="view_mrp_report_list" model="ir.ui.view">
+        <field name="name">mrp.report.list</field>
+        <field name="model">mrp.production</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="efficiency_percentage"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
