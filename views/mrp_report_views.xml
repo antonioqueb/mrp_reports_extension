@@ -9,7 +9,7 @@
     <record id="action_mrp_report_preview" model="ir.actions.act_window">
         <field name="name">Vista Previa: Eficiencia</field>
         <field name="res_model">mrp.production</field>
-        <field name="view_mode">tree"/>
+        <field name="view_mode">tree</field>
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p>
@@ -26,7 +26,7 @@
             <tree string="Vista Previa: Reporte de Eficiencia">
                 <field name="name" string="Orden de Producción"/>
                 <field name="product_id" string="Producto"/>
-                <field name="efficiency_percentage" string="Eficiencia (%)" widget="float"/> <!-- Agregar widget adecuado -->
+                <field name="efficiency_percentage" string="Eficiencia (%)"/> <!-- Campo de eficiencia -->
                 <field name="state" string="Estado"/>
                 <field name="date_start" string="Fecha de Inicio"/> 
             </tree>
