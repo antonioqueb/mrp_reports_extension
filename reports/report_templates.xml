@@ -1,8 +1,29 @@
 <odoo>
-    <template id="report_base_template">
-        <t t-call="web.html_container">
-            <t t-set="title">Reporte de Eficiencia MRP</t>
-            <t t-raw="0" />
+    <template id="report_product_efficiency">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <h2>Reporte Consolidado de Eficiencia por Producto</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad Total</th>
+                            <th>Duración Planificada Total</th>
+                            <th>Duración Real Total</th>
+                            <th>Eficiencia Promedio (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="docs" t-as="doc">
+                            <td t-esc="doc.product_id.name"/>
+                            <td t-esc="doc.total_quantity"/>
+                            <td t-esc="doc.total_planned_duration"/>
+                            <td t-esc="doc.total_real_duration"/>
+                            <td t-esc="doc.average_efficiency"/> <!-- Mostrar eficiencia -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </t>
     </template>
 </odoo>

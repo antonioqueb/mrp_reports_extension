@@ -9,7 +9,7 @@
     <record id="action_mrp_report_preview" model="ir.actions.act_window">
         <field name="name">Vista Previa: Eficiencia</field>
         <field name="res_model">mrp.production</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree"/>
         <field name="domain">[]</field>
         <field name="help" type="html">
             <p>
@@ -26,9 +26,9 @@
             <tree string="Vista Previa: Reporte de Eficiencia">
                 <field name="name" string="Orden de Producción"/>
                 <field name="product_id" string="Producto"/>
-                <field name="efficiency_percentage" string="Eficiencia (%)"/>
+                <field name="efficiency_percentage" string="Eficiencia (%)" widget="float"/> <!-- Agregar widget adecuado -->
                 <field name="state" string="Estado"/>
-                <field name="date_start" string="Fecha de Inicio"/> <!-- Reemplazado -->
+                <field name="date_start" string="Fecha de Inicio"/> 
             </tree>
         </field>
     </record>
@@ -39,14 +39,4 @@
               parent="menu_mrp_reports_extension" 
               action="action_mrp_report_preview" 
               sequence="20" />
-
-    <!-- Acción para Generar PDF -->
-    <record id="action_generate_pdf" model="ir.actions.server">
-        <field name="name">Generar Reporte PDF</field>
-        <field name="model_id" ref="mrp.model_mrp_production"/>
-        <field name="state">code</field>
-        <field name="code">
-            action = env['ir.actions.report']._get_report_from_name('mrp_reports_extension.report_mrp_efficiency').report_action(records)
-        </field>
-    </record>
 </odoo>
