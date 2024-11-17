@@ -14,6 +14,16 @@
         <field name="context">{'default_report_mode': 'preview'}</field>
     </record>
 
+    <!-- Acción para Generar PDF -->
+    <record id="action_generate_pdf" model="ir.actions.server">
+        <field name="name">Generar Reporte PDF</field>
+        <field name="model_id" ref="mrp.model_mrp_production"/>
+        <field name="state">code</field>
+        <field name="code">
+            action = env['ir.actions.report']._get_report_from_name('mrp_reports_extension.report_mrp_efficiency').report_action(records)
+        </field>
+    </record>
+
     <!-- Vista Lista Personalizada -->
     <record id="view_mrp_report_list" model="ir.ui.view">
         <field name="name">mrp.report.list</field>
@@ -28,7 +38,7 @@
         </field>
     </record>
 
-    <!-- Botón para Generar PDF -->
+    <!-- Vista Formulario con Botón para Generar PDF -->
     <record id="view_mrp_report_list_form" model="ir.ui.view">
         <field name="name">mrp.report.list.form</field>
         <field name="model">mrp.production</field>
