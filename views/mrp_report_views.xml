@@ -29,7 +29,7 @@
                 <field name="efficiency_percentage"/>
                 <field name="state"/>
                 <field name="date_start"/>
-                <button name="%(action_mrp_report_pdf)d" string="Generar PDF" type="action" class="btn-primary"/>
+                <button name="%(mrp_reports_extension.action_mrp_report_pdf)d" string="Generar PDF" type="action" class="btn-primary"/>
             </tree>
         </field>
     </record>
