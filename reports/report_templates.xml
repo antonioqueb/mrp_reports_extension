@@ -19,7 +19,7 @@
                             <td t-esc="doc.total_quantity"/>
                             <td t-esc="doc.total_planned_duration"/>
                             <td t-esc="doc.total_real_duration"/>
-                            <td t-esc="doc.average_efficiency"/> <!-- Mostrar eficiencia -->
+                            <td t-esc="doc.average_efficiency"/>
                         </tr>
                     </tbody>
                 </table>

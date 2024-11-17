@@ -1,41 +1,11 @@
 <odoo>
-    <!-- Definición del Reporte -->
     <report
         id="report_product_efficiency"
-        model="mrp.product.efficiency.report"
-        string="Reporte Consolidado de Eficiencia por Producto"
+        model="mrp.production"
+        string="Reporte Consolidado de Eficiencia"
         report_type="qweb-pdf"
         name="mrp_reports_extension.report_product_efficiency"
         file="mrp_reports_extension.report_product_efficiency"
-        print_report_name="'Reporte_Eficiencia_%s' % (object.create_date.strftime('%Y-%m-%d'))"
+        print_report_name="'Reporte_Eficiencia_%s' % (object.name)"
     />
-
-    <!-- Plantilla del Reporte -->
-    <template id="report_product_efficiency">
-        <t t-call="web.basic_layout">
-            <div class="page">
-                <h2 style="text-align: center;">Reporte Consolidado de Eficiencia por Producto</h2>
-                <table class="table table-bordered" style="width: 100%; border-collapse: collapse;">
-                    <thead style="background-color: #f5f5f5;">
-                        <tr>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Producto</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Cantidad Total</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Duración Planificada Total</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Duración Real Total</th>
-                            <th style="padding: 8px; border: 1px solid #ddd;">Eficiencia Promedio (%)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr t-foreach="docs" t-as="doc">
-                            <td style="padding: 8px; border: 1px solid #ddd;" t-esc="doc.product_id.name"/>
-                            <td style="padding: 8px; border: 1px solid #ddd;" t-esc="doc.total_quantity"/>
-                            <td style="padding: 8px; border: 1px solid #ddd;" t-esc="doc.total_planned_duration"/>
-                            <td style="padding: 8px; border: 1px solid #ddd;" t-esc="doc.total_real_duration"/>
-                            <td style="padding: 8px; border: 1px solid #ddd;" t-esc="doc.average_efficiency"/>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </t>
-    </template>
 </odoo>
