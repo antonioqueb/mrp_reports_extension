@@ -1,14 +1,36 @@
 <odoo>
-    <menuitem id="menu_mrp_reports_extension" name="MRP Reportes" parent="mrp.menu_mrp_root" sequence="10" />
+    <!-- Menú para Reportes MRP -->
+    <menuitem id="menu_mrp_reports_extension" 
+              name="Reportes MRP" 
+              parent="mrp.menu_mrp_root" 
+              sequence="10" />
 
+    <!-- Acción para listar órdenes de producción con reporte de eficiencia -->
+    <record id="action_mrp_report_list" model="ir.actions.act_window">
+        <field name="name">Reporte de Eficiencia</field>
+        <field name="res_model">mrp.production</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_mrp_report_list"/>
+        <field name="domain">[]</field>
+    </record>
+
+    <!-- Vista Lista Personalizada -->
     <record id="view_mrp_report_list" model="ir.ui.view">
         <field name="name">mrp.report.list</field>
         <field name="model">mrp.production</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
-                <field name="efficiency_percentage"/>
+                <field name="name" string="Orden de Producción"/>
+                <field name="product_id" string="Producto"/>
+                <field name="efficiency_percentage" string="Eficiencia (%)"/>
             </tree>
         </field>
     </record>
+
+    <!-- Enlace del Menú al Reporte -->
+    <menuitem id="menu_mrp_report_efficiency" 
+              name="Eficiencia de Producción" 
+              parent="menu_mrp_reports_extension" 
+              action="action_mrp_report_list" 
+              sequence="20" />
 </odoo>
