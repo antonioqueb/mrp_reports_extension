@@ -5,32 +5,19 @@
               parent="mrp.menu_mrp_root" 
               sequence="10" />
 
-    <!-- Acción para listar órdenes de producción con reporte de eficiencia -->
-    <record id="action_mrp_report_list" model="ir.actions.act_window">
+    <!-- Acción para generar el reporte PDF -->
+    <record id="action_mrp_report_pdf" model="ir.actions.report">
         <field name="name">Reporte de Eficiencia</field>
-        <field name="res_model">mrp.production</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_mrp_report_list"/>
-        <field name="domain">[]</field>
-    </record>
-
-    <!-- Vista Lista Personalizada -->
-    <record id="view_mrp_report_list" model="ir.ui.view">
-        <field name="name">mrp.report.list</field>
         <field name="model">mrp.production</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="name" string="Orden de Producción"/>
-                <field name="product_id" string="Producto"/>
-                <field name="efficiency_percentage" string="Eficiencia (%)"/>
-            </tree>
-        </field>
+        <field name="report_name">mrp_reports_extension.report_mrp_efficiency</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="binding_model_id" ref="mrp.model_mrp_production"/>
     </record>
 
-    <!-- Enlace del Menú al Reporte -->
-    <menuitem id="menu_mrp_report_efficiency" 
-              name="Eficiencia de Producción" 
+    <!-- Enlace del Menú al Reporte PDF -->
+    <menuitem id="menu_mrp_report_efficiency_pdf" 
+              name="Eficiencia de Producción (PDF)" 
               parent="menu_mrp_reports_extension" 
-              action="action_mrp_report_list" 
+              action="action_mrp_report_pdf" 
               sequence="20" />
 </odoo>
